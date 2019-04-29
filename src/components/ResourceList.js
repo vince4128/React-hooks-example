@@ -56,7 +56,9 @@ const ResourceList = ({resource}) => {
         if there is no 2nd argument, the function is called every time (! warning could cause spam request, because fetchResource is called and call setResources who update the component and run useEffect again and again...)
     */
 
-    return <div>{resources.length}</div>;
+    return (
+        <ul>{resources.map(record => <li key={record.id}>{record.title}</li>)}</ul>
+    );
 
 }
 
