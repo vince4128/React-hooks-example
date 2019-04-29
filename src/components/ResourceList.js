@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
+
+
 /*class ResourceList extends Component{
 
     state = {resources: []}
@@ -27,15 +29,9 @@ import axios from 'axios';
 
 /* refactor the class component in functional component using hooks */
 
-const ResourceList = ({resource}) => {
+const useResources = (resource) => {
 
     const [resources, setResources] = useState([]);
-
-    /*const fetchResource = async (resource) => {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`)
-
-        setResources(response.data);    
-    }*/
 
     useEffect(
         () => {
@@ -49,6 +45,22 @@ const ResourceList = ({resource}) => {
         }, 
         [resource]
     );
+
+    return resources
+
+}
+
+const ResourceList = ({resource}) => {
+
+    const resources = useResources(resource);
+
+    /*const fetchResource = async (resource) => {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`)
+
+        setResources(response.data);    
+    }*/
+
+    
     /*
         useEffect combine the componentDidUpdate and the componentDidMount method
         we have to put, resource in the 2nd argument (array) for componenDidUpdate
