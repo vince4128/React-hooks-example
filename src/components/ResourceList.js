@@ -31,15 +31,24 @@ const ResourceList = ({resource}) => {
 
     const [resources, setResources] = useState([]);
 
-     const fetchResource = async (resource) => {
+    /*const fetchResource = async (resource) => {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`)
 
         setResources(response.data);    
-    }
+    }*/
 
-    useEffect(() => {
-        fetchResource(resource)
-    }, [resource]);
+    useEffect(
+        () => {
+            (async resource => {
+                const response = await axios.get(
+                    `https://jsonplaceholder.typicode.com/${resource}`
+                );
+
+                setResources(response.data);
+            })(resource);
+        }, 
+        [resource]
+    );
     /*
         useEffect combine the componentDidUpdate and the componentDidMount method
         we have to put, resource in the 2nd argument (array) for componenDidUpdate
